@@ -1,0 +1,761 @@
+package com.TEST;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+import java.net.SocketException;
+import java.text.DecimalFormat;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+public class MainActivity extends AppCompatActivity {
+    TextView text_theme;
+    TextView text_address;
+    EditText edit_address;
+    TextView text_port;
+    EditText edit_port;
+    TextView text_choose;
+    RadioButton radioButton_zl;
+    RadioButton radioButton_jsd;
+    RadioButton radioButton_fx;
+    RadioButton radioButton_tly;
+    Button button_show;
+    TextView text_show,text_show2,text_show3,text_show4;
+    TextView text1,text2,text3,text4;
+    Button button_send,button_sendall;
+    String accelerometer_cvs_line,gravity_cvs_line,orient_cvs_line,gyrosc_cvs_line;
+    public static String destination_host;
+    public static int destination_port,destination_port2,destination_port3,destination_port4,destination_port1;
+    public static DatagramSocket datagramSocket;
+    //发送UDP数据
+    public void SendDebugMessageByUdp_all() throws SocketException {
+        //从EditText视图获取目的地主机地址
+        Editable editable_host = edit_address.getEditableText();
+        this.destination_host = editable_host.toString();
+        //从EditText视图获取目的地UDP端口编号
+
+        this.destination_port1 = 1234;//字符串转整数
+        this.destination_port2 = 1235;
+        this.destination_port3 = 1236;
+        this.destination_port4 = 1237;
+        // text_choose.setText(string_port);
+        int k=1;
+
+        Thread th =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet1 = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port1);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet1);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th.start();
+
+        Thread th2 =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show2.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet2 = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port2);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet2);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th2.start();
+        Thread th3 =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show3.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet3 = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port3);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet3);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th3.start();
+        Thread th4 =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show4.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet4 = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port4);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet4);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+       th4.start();
+
+    }
+    public void SendDebugMessageByUdp_zl() throws SocketException {
+        //从EditText视图获取目的地主机地址
+        Editable editable_host = edit_address.getEditableText();
+       this.destination_host = editable_host.toString();
+        //从EditText视图获取目的地UDP端口编号
+        Editable editable_port = edit_port.getEditableText();
+        String string_port = editable_port.toString();
+        this.destination_port = Integer.parseInt(string_port);//字符串转整数
+       // text_choose.setText(string_port);
+        Thread th =new Thread(){
+            public void run() {
+
+                    byte[] byte_array = text_show.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                      datagramSocket.close();
+                      datagramSocket = null;
+                      datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+            th.start();
+    }
+    public void SendDebugMessageByUdp_fx() throws SocketException {
+        //从EditText视图获取目的地主机地址
+        Editable editable_host = edit_address.getEditableText();
+        this.destination_host = editable_host.toString();
+        //从EditText视图获取目的地UDP端口编号
+        Editable editable_port = edit_port.getEditableText();
+        String string_port = editable_port.toString();
+        this.destination_port = Integer.parseInt(string_port);//字符串转整数
+        // text_choose.setText(string_port);
+        Thread th =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show2.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th.start();
+    }
+    public void SendDebugMessageByUdp_jsd() throws SocketException {
+        //从EditText视图获取目的地主机地址
+        Editable editable_host = edit_address.getEditableText();
+        this.destination_host = editable_host.toString();
+        //从EditText视图获取目的地UDP端口编号
+        Editable editable_port = edit_port.getEditableText();
+        String string_port = editable_port.toString();
+        this.destination_port = Integer.parseInt(string_port);//字符串转整数
+        // text_choose.setText(string_port);
+        Thread th =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show3.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th.start();
+    }
+    public void SendDebugMessageByUdp_tly() throws SocketException {
+        //从EditText视图获取目的地主机地址
+        Editable editable_host = edit_address.getEditableText();
+        this.destination_host = editable_host.toString();
+        //从EditText视图获取目的地UDP端口编号
+        Editable editable_port = edit_port.getEditableText();
+        String string_port = editable_port.toString();
+        this.destination_port = Integer.parseInt(string_port);//字符串转整数
+        // text_choose.setText(string_port);
+        Thread th =new Thread(){
+            public void run() {
+
+                byte[] byte_array = text_show4.getText().toString().getBytes();
+
+                try {
+                    //IP地址用InetAddress类表示
+                    InetAddress inet_address = InetAddress.getByName(destination_host);
+                    //UDP数据报用DatagramPacket类表示
+                    DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                            byte_array.length, inet_address, destination_port);
+                    DatagramSocket datagramSocket = new DatagramSocket();
+                    //网络输入输出口作为插口被抽象化
+                    if(null != datagramSocket){
+                        datagramSocket.close();
+                        datagramSocket = null;
+                        datagramSocket = new DatagramSocket();
+                    }
+                    //Datagram Socket被交给Datagram Packet后
+                    //将UDP数据发送至指定的收件人地址。
+                    datagramSocket.send(datagram_packet);
+                } catch (IOException io_exception) {
+                    //出现问题时捕捉例外并输出至日志
+                    Log.v("SendDebugMessageByUdp", io_exception.toString());
+                }
+            }
+
+        };
+        th.start();
+    }
+    // 用于格式化十进制固定小数点的类 DecimalFormat
+    private static final DecimalFormat decimal_format = new DecimalFormat(
+            "000.0000000");
+    //传感器数据
+    SensorManager sensorManager;
+    SensorEventListener eventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            Log.i("jeff","onSensorChanged event="+event.values.toString());
+            float [] values = event.values;
+            switch (event.sensor.getType()){
+                case Sensor.TYPE_GRAVITY:
+                    text_show.setText(gravity_cvs_line);
+                    Thread th2 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    Thread th22 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet1 = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port1);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet1);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    if(button_sendall.isClickable()){
+                        th22.start();
+                    }
+                    if(radioButton_zl.isChecked()){
+                        th2.start();
+                    }
+                    gravity_cvs_line = "gx, "
+                            + "y, "  + "z, "
+                            + decimal_format.format(event.values[0]) + ", "
+                            + decimal_format.format(event.values[1]) + ", "
+                            + decimal_format.format(event.values[2]);
+                    break;
+                case Sensor.TYPE_ORIENTATION:
+                    text_show2.setText(orient_cvs_line);
+                    Thread th3 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show2.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    Thread th33 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show2.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet2 = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port2);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet2);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    if(button_sendall.isClickable()){
+                        th33.start();
+                    }
+                    if(radioButton_fx.isChecked()) {
+                        th3.start();
+                    }
+                    orient_cvs_line = "ox, "
+                            + "y, "  + "z, "
+                            + decimal_format.format(event.values[0]) + ", "
+                            + decimal_format.format(event.values[1]) + ", "
+                            + decimal_format.format(event.values[2]);
+                    break;
+                case Sensor.TYPE_ACCELEROMETER:
+                    text_show3.setText(accelerometer_cvs_line);
+                    Thread th4 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show3.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    Thread th44 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show3.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet3 = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port3);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet3);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    if(button_sendall.isClickable()){
+                        th44.start();
+                    }
+                    if(radioButton_jsd.isChecked()) {
+                        th4.start();
+                    }
+                    accelerometer_cvs_line = "ax, "
+                            + "y, "  + "z, "
+                            + decimal_format.format(event.values[0]) + ", "
+                            + decimal_format.format(event.values[1]) + ", "
+                            + decimal_format.format(event.values[2]);
+                    break;
+                case Sensor.TYPE_GYROSCOPE:
+                    text_show4.setText(gyrosc_cvs_line);
+                    Thread th5 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show4.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    Thread th55 =new Thread(){
+                        public void run() {
+                            try {
+                                byte[] byte_array =  text_show4.getText().toString().getBytes();
+                                //IP地址用InetAddress类表示
+                                InetAddress inet_address = InetAddress.getByName(destination_host);
+
+                                //UDP数据报用DatagramPacket类表示
+                                DatagramPacket datagram_packet4 = new DatagramPacket(byte_array,
+                                        byte_array.length, inet_address, destination_port4);
+
+                                DatagramSocket datagramSocket = new DatagramSocket();
+                                //网络输入输出口作为插口被抽象化
+                                if(null != datagramSocket){
+                                    datagramSocket.close();
+                                    datagramSocket = null;
+                                    datagramSocket = new DatagramSocket();
+                                }
+                                //Datagram Socket被交给Datagram Packet后
+                                //将UDP数据发送至指定的收件人地址。
+                                datagramSocket.send(datagram_packet4);
+                            } catch (IOException io_exception) {
+                                //出现问题时捕捉例外并输出至日志
+                                Log.v("SendDebugMessageByUdp", io_exception.toString());
+                            }
+                        }
+
+                    };
+                    if(button_sendall.isClickable()){
+                        th55.start();
+                    }
+                    if(radioButton_tly.isChecked()) {
+                        th5.start();
+                    }
+                    gyrosc_cvs_line = "tx, "
+                            + "y, "  + "z, "
+                            + decimal_format.format(event.values[0]) + ", "
+                            + decimal_format.format(event.values[1]) + ", "
+                            + decimal_format.format(event.values[2]);
+                    break;
+            }
+        }
+
+        @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+                Sensor mySensor = sensor;
+                Log.i("jeff","onAccuracyChanged sensor="+sensor.getName()+",accuracy="+accuracy);
+                switch (mySensor.getType()){
+                    case Sensor.TYPE_GRAVITY:
+                        text1.setText("重力传感器:"+mySensor.getName()+",accuracy="+accuracy);
+                        break;
+                    case Sensor.TYPE_ORIENTATION:
+                        text2.setText("方向传感器:"+mySensor.getName()+",accuracy="+accuracy);
+                        break;
+                    case Sensor.TYPE_ACCELEROMETER:
+                        text3.setText("加速度传感器:"+mySensor.getName()+",accuracy="+accuracy);
+                        break;
+                    case Sensor.TYPE_GYROSCOPE:
+                        text4.setText("陀螺仪传感器:"+mySensor.getName()+",accuracy="+accuracy);
+                        break;
+                }
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        text_address=findViewById(R.id.text_address);
+        text_choose=findViewById(R.id.text_choose);
+        text_theme=findViewById(R.id.text_theme);
+        text_port=findViewById(R.id.text_port);
+        text_show=findViewById(R.id.text_show);
+        edit_address=findViewById(R.id.edit_address);
+        edit_port=findViewById(R.id.edit_port);
+        radioButton_zl=findViewById(R.id.radioButton_zl);
+        radioButton_fx=findViewById(R.id.radioButton_fx);
+        radioButton_jsd=findViewById(R.id.radioButton_jsd);
+        radioButton_tly=findViewById(R.id.radioButton_tly);
+        button_send=findViewById(R.id.button_send);
+        text_show = (TextView) findViewById(R.id.text_show);
+        text1 = (TextView) findViewById(R.id.text1);
+        text_show2 = (TextView) findViewById(R.id.text_show2);
+        text2 = (TextView) findViewById(R.id.text2);
+        text_show3 = (TextView) findViewById(R.id.text_show3);
+        text3 = (TextView) findViewById(R.id.text3);
+        text_show4 = (TextView) findViewById(R.id.text_show4);
+        text4 = (TextView) findViewById(R.id.text4);
+        button_send=findViewById(R.id.button_send);
+        button_sendall = findViewById(R.id.button_sendall);
+        button_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //按下发送按钮时调用的方法
+            public void onClick(View v) {
+                switch (v.getId()) {
+
+                    case R.id.button_send:
+                        try {
+                            if(radioButton_zl.isChecked()) {
+                                SendDebugMessageByUdp_zl();
+                                text_choose.setText("重力");
+                            }
+                            else if(radioButton_fx.isChecked()){
+                                SendDebugMessageByUdp_fx();
+                                text_choose.setText("方向");
+                            }
+                            else if(radioButton_jsd.isChecked()){
+                                SendDebugMessageByUdp_jsd();
+                                text_choose.setText("加速度");
+                            }
+                            else if(radioButton_tly.isChecked()){
+                                SendDebugMessageByUdp_tly();
+                                text_choose.setText("陀螺仪");
+                            }
+                            else{
+                                text_choose.setText("请选择传感器类型");
+                            }
+                        } catch (SocketException e) {
+                            e.printStackTrace();
+                        }
+                        Log.v("SensorUdp#onClick", "ButtonSendDebugMessage");
+                        break;
+
+                }
+            }
+        });
+
+        button_sendall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //按下发送按钮时调用的方法
+            public void onClick(View v) {
+                switch (v.getId()) {
+
+                    case R.id.button_sendall:
+                        try {
+
+                                SendDebugMessageByUdp_all();
+
+                        } catch (SocketException e) {
+                            e.printStackTrace();
+                        }
+                }}});
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Sensor gSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        Sensor mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor oSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        Sensor gySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        sensorManager.registerListener(eventListener,gSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(eventListener,mSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(eventListener,oSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(eventListener,gySensor,SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(eventListener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+
+}
+
